@@ -13,22 +13,18 @@ public:
         bumper_pos_ = 0;
   }
 
-  void callback(kobuki_msgs::BumperEvent::ConstPtr& bump)
+  void callback(const kobuki_msgs::BumperEvent::ConstPtr& bump)
   {
-    /*
+
     bumper_pos_ = bump->bumper;
     state_ = bump->state;
-    */
-    ;
   }
 
   void step()
   {
-    /*
-    ROS_INFO("Bumper: %d\n", bumper_pos_);
-    ROS_INFO("State: %d\n", state_);
-    */
-    ;
+
+    ROS_INFO("Bumper: %u\n", bumper_pos_);
+    ROS_INFO("State: %u\n", state_);
   }
 private:
   ros::NodeHandle nh_;

@@ -1,0 +1,6 @@
+<launch>
+
+	<node pkg="nodo_simple_py" type="publisher_simple_node.py" name="publisher_simple_node" />
+	<node pkg="nodo_simple_py" type="subscriber_simple_node.py" name="subscriber_simple_node" output="screen" />
+
+</launch>

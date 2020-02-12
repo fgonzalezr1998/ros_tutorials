@@ -9,6 +9,7 @@ public:
     nh_("~")
   {
         bumper_ = nh_.subscribe("/mobile_base/events/bumper", 1, &BumpGo::callback, this);
+        vel_ = nh_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
         state_ = 0;
         bumper_pos_ = 0;
   }
@@ -22,15 +23,31 @@ public:
 
   void step()
   {
-
-    ROS_INFO("Bumper: %u\n", bumper_pos_);
-    ROS_INFO("State: %u\n", state_);
+    float w;
+    float v = 0.1;
+    if (state_ == 0)
+      return;
+    if (bumper_pos_ == 0 || bumper_pos_ == 1)
+    {
+      w = -pi/6;
+      v = 0;
+    }
+    else
+    {
+      w = pi/6;
+      v = 0;
+    }
+    geometry_msgs::Twist msg;
+    msg.linear.x = v;
+    msg.angular.z = w;
+    vel_.publish(msg);
   }
 private:
   ros::NodeHandle nh_;
   ros::Publisher vel_;
   ros::Subscriber bumper_;
   uint8_t state_, bumper_pos_;
+  float pi = 3.1416;
 
 };
 

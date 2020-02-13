@@ -24,19 +24,23 @@ public:
   void step()
   {
     float w;
-    float v = 0.1;
+    float v;
     if (state_ == 0)
-      return;
-    if (bumper_pos_ == 0 || bumper_pos_ == 1)
     {
-      w = -pi/6;
-      v = 0;
+        v = 0.13;
+        w = 0;
+    }else{
+        v = -0.12;
+        if (bumper_pos_ == 0 || bumper_pos_ == 1)
+        {
+          w = -pi/6;
+        }
+        else
+        {
+          w = pi/6;
+        }
     }
-    else
-    {
-      w = pi/6;
-      v = 0;
-    }
+
     geometry_msgs::Twist msg;
     msg.linear.x = v;
     msg.angular.z = w;

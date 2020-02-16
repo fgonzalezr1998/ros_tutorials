@@ -58,7 +58,7 @@ private:
 
 int main (int argc, char **argv)
 {
-  ros::init(argc, argv, "kobuki_bumper_and_go");
+  ros::init(argc, argv, "kobuki_bump_and_go");
 
   BumpGo bg;
   ros::Rate rate (10);

@@ -1,13 +1,19 @@
 <launch>
 
-	<include file="$(find gazebo_ros)/launch/empty_world.launch">
-		<arg name="world_name" value="$(find first_robot_gazebo)/worlds/first_world.world" />
-	</include>
+	<arg name="world_name" default="$(find csuro_robots)/worlds/GrannyAnnie.world" />
 
-	<include file="$(find robots)/launch/includes/robot.launch.xml">
-      <arg name="posx" value="0.0"/>
-      <arg name="posy" value="0.0"/>
-      <arg name="posYaw" value="1.1416"/>
+	<!-- Robot initial pose -->
+	<arg name="posx" default="0.0"/>
+	<arg name="posy" default="0.0"/>
+	<arg name="posYaw" default="3.1416"/>
+
+	<include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+		<arg name="world_file" value="$(arg world_name)" />
+
+		<!-- Robot initial pose -->
+		<arg name="posx" value="$(arg posx)"/>
+		<arg name="posy" value="$(arg posy)"/>
+		<arg name="posYaw" value="$(arg posYaw)"/>
     </include>
 
 </launch>

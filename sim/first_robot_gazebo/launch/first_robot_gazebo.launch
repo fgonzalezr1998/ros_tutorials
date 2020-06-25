@@ -39,7 +39,11 @@
 
 	<node pkg="tf" type="static_transform_publisher" name="bf2camera"
     args="-0.015 0.0035 0.004 0 0 0 base_footprint camera_link 100"/>
+
   <node pkg="tf" type="static_transform_publisher" name="bf2laser"
     args="0 0 0.4 0 0 0 base_footprint rplidar_link 100"/>
+
+	<node pkg="tf" type="static_transform_publisher" name="laser2map"
+    args="0 0 0 0 0 0 rplidar_link map 100"/>
 
 </launch>

@@ -26,14 +26,14 @@ public:
 		try
 		{
 			transform = tf_buffer_.lookupTransform("camera_link", original_cloud_.header.frame_id,
-	        													original_cloud_.header.stamp + ros::Duration(2.0), ros::Duration(2.0));
+	        				original_cloud_.header.stamp + ros::Duration(2.0), ros::Duration(2.0));
 
 			tf2::doTransform(original_cloud_, cloud_out, transform);
 		}catch(tf2::TransformException& ex){
 			ROS_WARN("%s", ex.what());
       return;
 		}
-		ROS_INFO("%s\n", "Everithing was OK!");
+		ROS_INFO("%s\n", "Everything was OK!");
 	}
 
 private:

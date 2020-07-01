@@ -22,7 +22,7 @@ public:
 
 		if(! pc_received_)
 			return;
-			
+
 		try
 		{
 			transform = tf_buffer_.lookupTransform("camera_link", original_cloud_.header.frame_id,
@@ -56,7 +56,7 @@ private:
 int
 main(int argc, char **argv)
 {
-	ros::init(argc, argv, "point_tf_transformer_node");
+	ros::init(argc, argv, "pointcloud_tf_transformer_node");
 
 	TFTransformer transformer;
 	ros::Rate loop_rate(5);		//5Hz

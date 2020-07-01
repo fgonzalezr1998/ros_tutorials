@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(point_transformation_example)
+project(pointcloud_transformation_example)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -136,7 +136,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 
-add_executable(point_tf_transformer_node src/point_tf_transformer.cpp)
+add_executable(pointcloud_tf_transformer_node src/pointcloud_tf_transformer.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,7 +150,7 @@ add_executable(point_tf_transformer_node src/point_tf_transformer.cpp)
 
 ## Specify libraries to link a library or executable target against
 
-target_link_libraries(point_tf_transformer_node
+target_link_libraries(pointcloud_tf_transformer_node
    ${catkin_LIBRARIES}
 )
 

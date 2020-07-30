@@ -18,8 +18,8 @@ public:
 		if(!received_)
 			return;
 
-		ROS_INFO("I received: %d\n", recv_msg_.data);
 		received_ = false;
+		ROS_INFO("I received: %d\n", recv_msg_.data);
 	}
 
 private:
@@ -46,7 +46,7 @@ main(int argc, char **argv)
 
 	//¿Que pasa si le ponemos 1Hz?
 
-	ros::Rate loop_rate(1);
+	ros::Rate loop_rate(2);
 	while(ros::ok()){
 		sub.doWork();
 		ros::spinOnce();

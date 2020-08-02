@@ -36,14 +36,12 @@
 	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />
   </node>
-
+	<!--
 	<node pkg="tf" type="static_transform_publisher" name="bf2camera"
     args="-0.015 0.0035 0.004 0 0 0 base_footprint camera_link 100"/>
-
-  <node pkg="tf" type="static_transform_publisher" name="bf2laser"
-    args="0 0 0.4 0 0 0 base_footprint rplidar_link 100"/>
-
-	<node pkg="tf" type="static_transform_publisher" name="laser2map"
-    args="0 0 0 0 0 0 rplidar_link map 100"/>
+	-->
+	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+    <rosparam command="load" file="$(find first_robot_gazebo)/definition/hokuyo_config.yaml" />
+  </node>
 
 </launch>

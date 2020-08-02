@@ -3,16 +3,22 @@
     - Base      : kobuki
     - Stacks    : hexagons
     - 3d Sensor : kinect
+    - Lidar Sensor: Hokuyo
 -->
 <robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
   <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
   <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
-  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/xtion_pro.urdf.xacro"/>
-  <xacro:include filename="$(find first_robot_gazebo)/definition/laser.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/asus_xtion_pro.urdf.xacro"/>
+
+  <!-- Hokuyo Sensor -->
+  <include filename="$(find first_robot_gazebo)/definition/hokuyo.urdf.xacro" />
+  <xacro:hokuyo name="laser0" parent="base_link" ros_topic="scan" update_rate="40" ray_count="1081" min_angle="135" max_angle="-135">
+      <origin xyz="0.0 0.0 0.08" rpy="${M_PI} 0 0"/>
+  </xacro:hokuyo>
 
   <xacro:kobuki/>
   <xacro:stack_hexagons   parent="base_link"/>
-  <xacro:sensor_xtion_pro parent="base_link" xtion_pro_cam_py="0.0205"/>
+  <xacro:sensor_asus_xtion_pro parent="base_link"/>
 </robot>

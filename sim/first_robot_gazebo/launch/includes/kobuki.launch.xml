@@ -1,4 +1,5 @@
 <launch>
+  <arg name="robot_name" default="mobile_base"/>
   <arg name="base"/>
   <arg name="stacks"/>
   <arg name="3d_sensor"/>
@@ -13,11 +14,11 @@
   <!-- Gazebo model spawner -->
 
   <node name="spawn_turtlebot_model" pkg="gazebo_ros" type="spawn_model"
-    args="-x $(arg posx) -y $(arg posy) -Y $(arg posYaw) -unpause -urdf -param robot_description -model mobile_base"/>
+    args="-x $(arg posx) -y $(arg posy) -Y $(arg posYaw) -unpause -urdf -param robot_description -model $(arg robot_name)"/>
 
   <!-- Velocity muxer -->
 
-	<include file="$(find kobuki_node)/launch/minimal.launch" />
+	<include file="$(find kobuki_node)/launch/robot_with_tf.launch" />
 
 	<!--
   <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>

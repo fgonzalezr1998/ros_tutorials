@@ -4,7 +4,7 @@ import rospy
 from std_msgs.msg import Int32
 
 def main():
-    rospy.init_node("simple_pub_node")
+    rospy.init_node("simple_pub_iterative_node")
 
     pub = rospy.Publisher("/talk", Int32, queue_size=1)
 

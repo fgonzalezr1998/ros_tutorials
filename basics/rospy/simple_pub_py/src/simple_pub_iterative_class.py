@@ -14,7 +14,7 @@ class Publisher():
         self.msg.data += 1
 
 def main():
-    rospy.init_node("simple_pub_node")
+    rospy.init_node("simple_pub_iterative_class_node")
 
     publisher = Publisher()
 

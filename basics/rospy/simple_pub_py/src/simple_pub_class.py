@@ -13,7 +13,7 @@ class Publisher():
         self.pub.publish(msg)
 
 def main():
-    rospy.init_node("simple_pub_node")
+    rospy.init_node("simple_pub_class_node")
 
     publisher = Publisher()
 

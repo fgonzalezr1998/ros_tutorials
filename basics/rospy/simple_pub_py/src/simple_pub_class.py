@@ -5,12 +5,12 @@ from std_msgs.msg import String
 
 class Publisher():
     def __init__(self):
-        self.pub = rospy.Publisher("/talk", String, queue_size=1)
+        self.pub_ = rospy.Publisher("/talk", String, queue_size=1)
 
     def doWork(self):
         msg = String()
         msg.data = "Hello World"
-        self.pub.publish(msg)
+        self.pub_.publish(msg)
 
 def main():
     rospy.init_node("simple_pub_class_node")

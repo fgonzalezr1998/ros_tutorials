@@ -25,7 +25,7 @@ public:
 private:
 
 	void
-	callback(const std_msgs::Int32::ConstPtr msg)
+	callback(const std_msgs::Int32::ConstPtr & msg)
 	{
 		recv_msg_ = *msg;
 		received_ = true;

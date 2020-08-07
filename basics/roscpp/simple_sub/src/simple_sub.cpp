@@ -2,7 +2,7 @@
 #include <std_msgs/Int32.h>
 
 void
-callback(const std_msgs::Int32::ConstPtr msg)
+callback(const std_msgs::Int32::ConstPtr & msg)
 {
 	ROS_INFO("I received: %d\n", msg->data);
 }

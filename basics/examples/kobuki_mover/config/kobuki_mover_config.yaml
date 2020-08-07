@@ -1,0 +1,3 @@
+vel_topic: /mobile_base/commands/velocity
+linear_vel: 0.0
+angular_vel: 2.0

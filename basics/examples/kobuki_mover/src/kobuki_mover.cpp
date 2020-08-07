@@ -63,7 +63,7 @@ private:
 
 		nh_.param("vel_topic", vel_topic_, vel_topic_);
 		nh_.param("linear_vel", v_, v_);
-		nh_.param("angular_vel", v_, v_);
+		nh_.param("angular_vel", w_, w_);
 	}
 
 	ros::NodeHandle nh_;

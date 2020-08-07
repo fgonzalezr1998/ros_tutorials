@@ -3,6 +3,7 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <kobuki_msgs/BumperEvent.h>
+#include "ros_tutorials_msgs/kobuki_vel.h"
 
 #define HZ 5
 #define DEBUG 1
@@ -25,6 +26,8 @@ public:
 		// Set publishers and subscribers:
 
 		vel_pub_ = nh_.advertise<geometry_msgs::Twist>(vel_topic_, 1);
+
+		vel_setter_srv_ = nh_.advertiseService("kobuki_vel_setter", &KobukiMover::velSetterCb, this);
 	}
 
 	void
@@ -41,6 +44,13 @@ public:
 	}
 
 private:
+
+	bool
+	velSetterCb(ros_tutorials_msgs::kobuki_vel::Request & request,
+		ros_tutorials_msgs::kobuki_vel::Response & response)
+  {
+		return true;
+	}
 
 	void
 	printParams()
@@ -67,7 +77,10 @@ private:
 	}
 
 	ros::NodeHandle nh_;
+
 	ros::Publisher vel_pub_;
+	ros::ServiceServer vel_setter_srv_;
+
 	std::string vel_topic_;
 	double v_, w_;
 };

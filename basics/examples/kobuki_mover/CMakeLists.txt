@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   geometry_msgs
   kobuki_msgs
+  ros_tutorials_msgs
 )
 
 catkin_package(

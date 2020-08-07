@@ -32,7 +32,7 @@ public:
 	      if (pressed_) {
 	        press_ts_ = ros::Time::now();
 	        state_ = GOING_BACK;
-	        ROS_INFO("GOING_FORWARD -> GOING_BACK");
+	        ROS_WARN("GOING_FORWARD -> GOING_BACK");
 	      }
 	      break;
 
@@ -43,7 +43,7 @@ public:
 	      if ((ros::Time::now() - press_ts_).toSec() > BACKING_TIME ) {
 	        turn_ts_ = ros::Time::now();
 	        state_ = TURNING;
-	        ROS_INFO("GOING_BACK -> TURNING");
+	        ROS_WARN("GOING_BACK -> TURNING");
 	      }
 	      break;
 
@@ -52,7 +52,7 @@ public:
 	      cmd.angular.z = -0.3;
 	      if ((ros::Time::now() - turn_ts_).toSec() > TURNING_TIME ) {
 	        state_ = GOING_FORWARD;
-	        ROS_INFO("TURNING -> GOING_FORWARD");
+	        ROS_WARN("TURNING -> GOING_FORWARD");
 	      }
 	      break;
     }

@@ -11,68 +11,65 @@ class KobukiMover
 {
 public:
 	KobukiMover()
+	:	nh_("~")
 	{
 		// Set Node Params:
 
-		init_params();
+		initParams();
 
-		//For Debug
-		if(DEBUG){
-			print_params();
-		}
+		//For Debug:
+
+		if(DEBUG)
+			printParams();
 
 		// Set publishers and subscribers:
 
 		vel_pub_ = nh_.advertise<geometry_msgs::Twist>(vel_topic_, 1);
-		bumper_sub_ = nh_.subscribe(bumper_topic_, 1, &KobukiMover::bumperCallback, this);
 	}
 
 	void
 	update()
 	{
+		geometry_msgs::Twist msg;
+
+		msg.linear.x = v_;
+		msg.angular.z = w_;
+
+		vel_pub_.publish(msg);
+
 		ROS_INFO("Step!\n");
 	}
 
 private:
 
 	void
-	bumperCallback(const kobuki_msgs::BumperEvent::ConstPtr & msg)
-	{
-		;
-	}
-
-	void
-	print_params()
+	printParams()
 	{
 		ROS_WARN("Velocity Topic: %s\n", vel_topic_.c_str());
-		ROS_WARN("Bumper Topic: %s\n", bumper_topic_.c_str());
 		ROS_WARN("Linear Velocity: %f\n", v_);
 		ROS_WARN("Angular Velocity: %f\n", w_);
 	}
 
 	void
-	init_params()
+	initParams()
 	{
 		// Default Values:
 
 		vel_topic_ = "/mobile_base/commands/velocity";
-		bumper_topic_ = "/mobile_base/events/bumper";
-		v_ = 0.5f;
+		v_ = 0.0;
 		w_ = M_PI / 5.0;
 
 		// Get params from param server with default values:
 
 		nh_.param("vel_topic", vel_topic_, vel_topic_);
-		nh_.param("bumper_topic", bumper_topic_, bumper_topic_);
 		nh_.param("linear_vel", v_, v_);
 		nh_.param("angular_vel", v_, v_);
 	}
 
 	ros::NodeHandle nh_;
 	ros::Publisher vel_pub_;
-	ros::Subscriber bumper_sub_;
-	std::string vel_topic_, bumper_topic_;
-	float v_, w_;
+	std::string vel_topic_;
+	double v_, w_;
 };
 
 int

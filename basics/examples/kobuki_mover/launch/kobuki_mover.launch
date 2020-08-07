@@ -1,0 +1,19 @@
+<launch>
+
+	<arg name="vel_topic" default="/mobile_base/commands/velocity" />
+	<arg name="linear_vel" default="0.1" />
+	<arg name="angular_vel" default= "0.0" />
+
+	<!-- Launch our node with params -->
+	<node pkg="kobuki_mover" type="kobuki_mover_node" name="kobuki_mover_node" output="screen">
+
+		<param name="vel_topic" type="str" value="$(arg vel_topic)" />
+		<param name="linear_vel" type="double" value="$(arg linear_vel)" />
+		<param name="angular_vel" type="double" value="$(arg angular_vel)" />
+
+	</node>
+
+	<!-- Comment or uncomment next line for real or simulated Kobuki -->
+	<include file="$(find turtlebot_sim_gui)/launch/sim_gui.launch" />
+
+</launch>

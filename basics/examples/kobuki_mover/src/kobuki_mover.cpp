@@ -49,6 +49,14 @@ private:
 	velSetterCb(ros_tutorials_msgs::kobuki_vel::Request & request,
 		ros_tutorials_msgs::kobuki_vel::Response & response)
   {
+		v_ = request.linear_vel;
+		w_ = request.angular_vel;
+
+		response.linear_vel = v_;
+		response.angular_vel = w_;
+
+		ROS_WARN("Spped changed! v: %f, w: %f\n", v_, w_);
+
 		return true;
 	}
 

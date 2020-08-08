@@ -8,10 +8,10 @@
 
 	<!-- Comment or uncomment next line for real or simulated Kobuki -->
 
-	<include file="$(find turtlebot_sim_gui)/launch/sim_gui.launch" />
+	<!--<include file="$(find turtlebot_sim_gui)/launch/sim_gui.launch" />-->
 
 	<!-- Launch our node with params -->
-	
+
 	<node pkg="kobuki_mover" type="kobuki_mover_node" name="kobuki_mover_node" output="screen">
 
 		<param name="vel_topic" value="$(arg vel_topic)" />

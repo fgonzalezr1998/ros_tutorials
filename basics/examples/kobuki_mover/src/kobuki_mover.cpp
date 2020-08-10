@@ -5,7 +5,7 @@
 #include <kobuki_msgs/BumperEvent.h>
 #include "ros_tutorials_msgs/kobuki_vel.h"
 
-#define HZ 5
+#define HZ 10
 #define DEBUG 1
 
 class KobukiMover
@@ -27,7 +27,7 @@ public:
 
 		vel_pub_ = nh_.advertise<geometry_msgs::Twist>(vel_topic_, 1);
 
-		vel_setter_srv_ = nh_.advertiseService("kobuki_vel_setter",
+		vel_setter_srv_ = nh_.advertiseService("/kobuki_vel_setter",
 			&KobukiMover::velSetterCb, this);
 	}
 

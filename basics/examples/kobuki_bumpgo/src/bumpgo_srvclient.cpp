@@ -12,11 +12,11 @@ class BumpGo
 public:
   BumpGo()
 	: o_state_(TURNING), n_state_(GOING_FORWARD), pressed_(false),
-    v_(0.03), w_(0.5)
+    v_(0.08), w_(0.2)
   {
     bumper_sub_ = nh_.subscribe("/mobile_base/events/bumper", 1, &BumpGo::bumperCallback, this);
     vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
-    srv_client_ = nh_.serviceClient<ros_tutorials_msgs::kobuki_vel>("kobuki_vel_setter");
+    srv_client_ = nh_.serviceClient<ros_tutorials_msgs::kobuki_vel>("/kobuki_vel_setter");
   }
 
   void
@@ -28,7 +28,6 @@ public:
   void
   step()
   {
-    geometry_msgs::Twist cmd;
     int st = n_state_;
 
     if(o_state_ != n_state_)
@@ -37,9 +36,6 @@ public:
     switch (n_state_) {
 
 	    case GOING_FORWARD:
-	      // cmd.linear.x = 0.15;
-	      // cmd.angular.z = 0.0;
-
 	      if (pressed_) {
 	        press_ts_ = ros::Time::now();
 	        n_state_ = GOING_BACK;
@@ -48,9 +44,6 @@ public:
 	      break;
 
 	    case GOING_BACK:
-	      // cmd.linear.x = -0.1;
-	      // cmd.angular.z = 0.0;
-
 	      if ((ros::Time::now() - press_ts_).toSec() > BACKING_TIME ) {
 	        turn_ts_ = ros::Time::now();
 	        n_state_ = TURNING;
@@ -59,9 +52,6 @@ public:
 	      break;
 
 	    case TURNING:
-	      // cmd.linear.x = 0.0;
-	      // cmd.angular.z = -0.3;
-
 	      if ((ros::Time::now() - turn_ts_).toSec() > TURNING_TIME ) {
 	        n_state_ = GOING_FORWARD;
 	        ROS_WARN("TURNING -> GOING_FORWARD");
@@ -70,8 +60,6 @@ public:
     }
 
     o_state_ = st;
-
-    vel_pub_.publish(cmd);
   }
 
 private:
@@ -79,7 +67,7 @@ private:
   void
   sendSpeed_(int st)
   {
-    // call to service
+    // Call to service
 
     ros_tutorials_msgs::kobuki_vel srv;
     switch (st) {

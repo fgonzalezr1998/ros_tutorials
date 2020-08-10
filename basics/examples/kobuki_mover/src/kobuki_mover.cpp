@@ -18,16 +18,17 @@ public:
 
 		initParams();
 
-		//For Debug:
+		// For Debug:
 
-		if(DEBUG)
+		if (DEBUG)
 			printParams();
 
 		// Set publishers and subscribers:
 
 		vel_pub_ = nh_.advertise<geometry_msgs::Twist>(vel_topic_, 1);
 
-		vel_setter_srv_ = nh_.advertiseService("kobuki_vel_setter", &KobukiMover::velSetterCb, this);
+		vel_setter_srv_ = nh_.advertiseService("kobuki_vel_setter",
+			&KobukiMover::velSetterCb, this);
 	}
 
 	void
@@ -101,7 +102,7 @@ main(int argc, char **argv)
 	KobukiMover km;
 
 	ros::Rate loop_rate(HZ);
-	while(ros::ok()){
+	while (ros::ok()) {
 		km.update();
 		ros::spinOnce();
 		loop_rate.sleep();

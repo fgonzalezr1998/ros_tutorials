@@ -15,12 +15,14 @@ public:
     vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
   }
 
-  void bumperCallback(const kobuki_msgs::BumperEvent::ConstPtr & msg)
+  void
+  bumperCallback(const kobuki_msgs::BumperEvent::ConstPtr & msg)
   {
     pressed_ = msg->state;
   }
 
-  void step()
+  void
+  step()
   {
     geometry_msgs::Twist cmd;
 
@@ -79,15 +81,16 @@ private:
 };
 
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
-  ros::init(argc, argv, "bumpgo_node");
+  ros::init(argc, argv, "bumpgo_srvclient_node");
 
   BumpGo bumpgo;
 
   ros::Rate loop_rate(10);
 
-  while (ros::ok()){
+  while (ros::ok()) {
     bumpgo.step();
     ros::spinOnce();
     loop_rate.sleep();

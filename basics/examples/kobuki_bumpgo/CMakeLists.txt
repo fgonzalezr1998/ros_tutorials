@@ -12,6 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   kobuki_msgs
   roscpp
   std_msgs
+  kobuki_mover
+  ros_tutorials_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -50,6 +52,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 
 add_executable(bumpgo_node src/bumpgo.cpp)
+add_executable(bumpgo_srvclient_node src/bumpgo_srvclient.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -64,6 +67,7 @@ add_executable(bumpgo_node src/bumpgo.cpp)
 ## Specify libraries to link a library or executable target against
 
 target_link_libraries(bumpgo_node ${catkin_LIBRARIES})
+target_link_libraries(bumpgo_srvclient_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##

@@ -15,7 +15,6 @@ public:
     v_(0.08), w_(0.2)
   {
     bumper_sub_ = nh_.subscribe("/mobile_base/events/bumper", 1, &BumpGo::bumperCallback, this);
-    vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1);
     srv_client_ = nh_.serviceClient<ros_tutorials_msgs::kobuki_vel>("/kobuki_vel_setter");
   }
 
@@ -112,7 +111,6 @@ private:
   ros::Time turn_ts_;
 
   ros::Subscriber bumper_sub_;
-  ros::Publisher vel_pub_;
   ros::ServiceClient srv_client_;
 };
 

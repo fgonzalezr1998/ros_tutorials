@@ -107,7 +107,7 @@ KobukiController::sendVelocity(remote_controller::ControllerSt controller_st)
   // Now, ang is between -1.0 and 1.0
 
   angular_vel.z = ang * MAXANGULARVEL;
-  if (isnan(angular_vel.z))
+  if (std::isnan(angular_vel.z))
     angular_vel.z = 0.0;
 
   vel.linear = linear_vel;
